@@ -1,0 +1,5 @@
+<h1>Account Activation</h1>
+
+<alert [type]="msg.severity" *ngFor="let msg of msgs" [dismissible]="true" (onClose)="onClosed(msg)">
+  <b>{{msg.summary}}:</b> {{msg.detail}}
+</alert>

@@ -1,0 +1,66 @@
+<h1>Users</h1>
+
+<button type="button" class="btn btn-lg btn-primary" (click)="showCreateDialog(template)">New User</button>
+
+<div class="card" *ngFor="let user of users">
+  <div class="card-body">
+    {{user.email + ' (' + user.first_name + ' ' + user.last_name + ')'}}
+    <div class="card-footer">
+      <button type="button" class="btn btn-secondary" (click)="showDialog(template, user.id)">Update</button>
+      <button type="button" class="btn-padding btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{isUpdating ? 'Edit User' : 'New User'}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancelDialog()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <alert [type]="msg.severity" *ngFor="let msg of msgs" [dismissible]="true" (onClose)="onClosed(msg)">
+      <b>{{msg.summary}}:</b> {{msg.detail}}
+    </alert>
+    <div class="form-group" *ngIf="!isUpdating">
+      <label for="userEmail">Email</label>
+      <input type="email" class="form-control" name="userEmail" id="userEmail" aria-describedby="userHelp" placeholder="Email" [(ngModel)]="email">
+      <small id="userHelp" class="form-text text-muted">The email address of the user</small>
+    </div>
+    <div class="form-group" *ngIf="!isUpdating">
+      <label for="userEmailConfirm">Email Confirmation</label>
+      <input type="email" class="form-control" name="userEmailConfirm" id="userEmailConfirm" aria-describedby="userEmailConfirmHelp" placeholder="Email Confirmation" [(ngModel)]="emailConfirm">
+      <small id="userEmailConfirmHelp" class="form-text text-muted">The email address of the user (for confirmation)</small>
+    </div>
+    <div class="form-group">
+      <label for="userFname">First Name</label>
+      <input type="text" class="form-control" name="userFname" id="userFname" aria-describedby="fNameHelp" placeholder="First Name" [(ngModel)]="firstName">
+      <small id="fNameHelp" class="form-text text-muted">The first name of the user</small>
+    </div>
+    <div class="form-group">
+      <label for="userLname">Last Name</label>
+      <input type="text" class="form-control" name="userLname" id="userLname" aria-describedby="lNameHelp" placeholder="Last Name" [(ngModel)]="lastName">
+      <small id="lNameHelp" class="form-text text-muted">The last name of the user</small>
+    </div>
+    <div class="form-group" *ngIf="!isUpdating">
+      <label for="p1">Password</label>
+      <input type="password" class="form-control" name="p1" id="p1" aria-describedby="p1Help" placeholder="Password" [(ngModel)]="password">
+      <small id="p1Help" class="form-text text-muted">The user's password</small>
+    </div>
+    <div class="form-group" *ngIf="!isUpdating">
+      <label for="p2">Password Confirmation</label>
+      <input type="password" class="form-control" name="p2" id="p2" aria-describedby="p2Help" placeholder="Password Confirmation" [(ngModel)]="passwordConfirm">
+      <small id="p2Help" class="form-text text-muted">The user's password (for confirmation)</small>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="admin" [(ngModel)]="admin">
+      <label class="form-check-label" for="admin">Administrator</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" *ngIf="isUpdating" class="btn btn-primary" (click)="saveUser(userId)">Save</button>
+    <button type="button" *ngIf="!isUpdating" class="btn btn-primary" (click)="saveUser()">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelDialog()">Cancel</button>
+  </div>
+</ng-template>

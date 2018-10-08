@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/functions";
+@import "variables";
+@import "~bootstrap/scss/bootstrap.scss";
+
+body {
+  margin: 0;
+}
+
+.btn-padding {
+  margin-left: .15rem;
+}

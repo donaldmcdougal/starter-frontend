@@ -1,0 +1,23 @@
+<h1>You must log in to continue.</h1>
+
+<div class="form-group">
+  <label for="email">Email</label>
+  <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Email" [(ngModel)]="email">
+  <small id="emailHelp" class="form-text text-muted">Your Email</small>
+</div>
+<div class="form-group">
+  <label for="password">Password</label>
+  <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordHelp" placeholder="Enter Password" [(ngModel)]="password">
+  <small id="passwordHelp" class="form-text text-muted">Your Password</small>
+</div>
+
+<div>
+  <button class="btn btn-secondary" routerLink="/password-reset-init">
+    <i class="fa fa-key"></i>
+    Forgot Password
+  </button>
+  <button class="btn btn-primary" (click)="submitCredentials()">
+    <i class="fa fa-sign-in"></i>
+    Log In
+  </button>
+</div>
